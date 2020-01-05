@@ -1,0 +1,15 @@
+li {
+    font-weight: bold;
+    color: #333;
+}
+
+body{
+    background-color: rgb(189, 103, 5) !important;
+    color: white !important;
+}
+
+img {
+    height: 25%;
+    width: 25%;
+}
+

@@ -1,5 +1,7 @@
 const orm = require("../config/orm.js");
 
+
+// Our model that works with our ORM to interact with our database and the front end
 const burger = {
 
     all: function (cb) {
