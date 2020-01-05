@@ -1,0 +1,72 @@
+<h1>Eat Dat Burger</h1>
+
+<h2>Add A Burger</h2>
+
+<form class="create-burger">
+    <textarea id="burger_name">
+
+    </textarea>
+    <button type="submit">Submit</button>
+</form c>
+
+<div class="burgers">
+    <h3>Eat These Burgies!!</h3>
+    <ul>
+        {{#each burgers}}
+            {{#unless devoured}}
+            <li>
+                {{burger_name}}
+                <button class="devour" data-id="{{id}}">Devour</button>
+            </li>
+        {{/unless}}
+        {{/each}}
+    </ul>
+</div>
+
+<div class="devoured">
+    <h3>Burger Graveyard</h3>
+    <ul>
+        {{#each burgers}}
+            {{#if devoured}}
+            <li>
+                {{burger_name}}
+            </li>
+        {{/if}}
+        {{/each}}
+    </ul>
+</div>
+
+<script>
+    $(function() {
+        console.log("hellO");
+    $(".create-burger").on("submit", function (event) {
+        event.preventDefault();
+
+        let newBurger = {
+            name: $("#burger_name").val().trim()
+        };
+
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        }).then(function() {
+            location.reload();
+        });
+    });
+
+    $(".devour").on("click", function (event) {
+        let id = $(this).data("id");
+        let newState = {
+            devoured: true
+        }
+
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: newState
+        }).then(function() {
+            location.reload();
+        })
+    })
+    
+})
+</script>
